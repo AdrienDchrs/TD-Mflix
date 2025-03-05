@@ -1,2 +1,3 @@
 # TD-Mflix
- TD pour les cours de NoSQL
+
+Adrien DECHARROIS - MAALSI 2024 - 2ème groupe
