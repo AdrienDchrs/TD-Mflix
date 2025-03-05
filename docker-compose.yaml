@@ -2,12 +2,9 @@ version: '3.8'
 
 services:
   db: 
-    image: mongo:latest
-    container_name: mongodb_mflix_container
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    image: mongo
+    env_file:
+      - ./db/.env
     networks:
       - ntwrk
     ports:
@@ -22,13 +19,15 @@ services:
     depends_on:
       - db
     environment:
-      - MONGO_URI=mongodb://user:userpassword@db:27017/mflix
+      - MONGO_URI=mongodb://admin:adminpassword@db:27017
       - MONGO_INITDB_DATABASE=mflix
       - MONGO_INITDB_COLLECTION=movies
+      - MONGO_INITDB_ROOT_PASSWORD=adminpassword 
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=userpassword
     ports:
       - "8080:80"
-    volumes:
-      - ./app:/var/www/html
   
 networks: 
   ntwrk: 
